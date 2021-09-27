@@ -74,6 +74,17 @@ class BinarySearchTree {
         }
         return data;
     }
+
+    traversePreOrder() {
+        let data: Array<any> = [];
+        function helper(node: BinaryNode) {
+            data.push(node.value);
+            if (node.left) helper(node.left);
+            if (node.right) helper(node.right);
+        }
+        helper(this.root);
+        return data;
+    }
 }
 
 const newtree = new BinarySearchTree();
@@ -83,3 +94,4 @@ newtree.insert(30);
 newtree.insert(7);
 newtree.insert(9);
 console.log(newtree.traverseBreadthFirst());
+console.log(newtree.traversePreOrder());
