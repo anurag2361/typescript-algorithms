@@ -32,11 +32,40 @@ class HashTable {
             }
         }
     }
+
+    values() {
+        let valuesArr: string[] = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let j = 0; j < this.keyMap[i].length; j++) {
+                    if (!valuesArr.includes(this.keyMap[i][j][1])) {
+                        valuesArr.push(this.keyMap[i][j][1]);
+                    }
+                }
+            }
+        }
+        return valuesArr;
+    }
+
+    keys() {
+        let keysArr: string[] = [];
+        for (let i = 0; i < this.keyMap.length; i++) {
+            if (this.keyMap[i]) {
+                for (let j = 0; j < this.keyMap[i].length; j++) {
+                    if (!keysArr.includes(this.keyMap[i][j][0])) {
+                        keysArr.push(this.keyMap[i][j][0]);
+                    }
+                }
+            }
+        }
+        return keysArr;
+    }
 }
 
-const ht = new HashTable(3);
+const ht = new HashTable(10);
 ht.set("hello", "world");
 ht.set("hello1", "world1");
 ht.set("hello2", "world2");
 ht.set("hello3", "world3");
-console.log(ht.get("hello2"))
+console.log(ht.keys());
+console.log(ht.values());
