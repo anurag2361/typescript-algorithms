@@ -133,11 +133,8 @@
 // graph.addEdge(v2, v3, 7);
 // console.log(graph.adjacencyList);
 
-interface Vertex {
+interface WeightedVertex {
     node: string,
-}
-
-interface WeightedVertex extends Vertex {
     weight: number
 }
 
@@ -151,7 +148,7 @@ class NewNode {
 }
 
 class PriorityQueue {
-    values: any;
+    values: NewNode[];
     constructor() {
         this.values = [];
     }
@@ -176,7 +173,7 @@ class PriorityQueue {
         const min = this.values[0];
         const end = this.values.pop();
         if (this.values.length > 0) {
-            this.values[0] = end;
+            this.values[0] = end as NewNode;
             this.sinkDown();
         }
         return min;
@@ -188,7 +185,7 @@ class PriorityQueue {
         while (true) {
             let leftChildIdx = 2 * idx + 1;
             let rightChildIdx = 2 * idx + 2;
-            let leftChild: any, rightChild: any;
+            let leftChild: NewNode = { val: "", priority: 0 }, rightChild: NewNode = { val: "", priority: 0 };
             let swap = null;
 
             if (leftChildIdx < length) {
@@ -226,10 +223,10 @@ class WeightedGraph {
         this.adjacencyList[vertex1].push({ node: vertex2, weight });
         this.adjacencyList[vertex2].push({ node: vertex1, weight });
     }
-    Dijkstra(start: string, finish: string) {
+    Dijkstra(start: string, finish: string): string[] {
         const nodes = new PriorityQueue();
         const distances: Record<string, number> = {};
-        const previous: Record<string, any> = {};
+        const previous: Record<string, string> = {};
         let path = [] //to return at end
         let smallest: string = "";
         //build up initial state
@@ -241,7 +238,7 @@ class WeightedGraph {
                 distances[vertex] = Infinity;
                 nodes.enqueue(vertex, Infinity);
             }
-            previous[vertex] = null;
+            previous[vertex] = "";
         }
         // as long as there is something to visit
         while (nodes.values.length) {
