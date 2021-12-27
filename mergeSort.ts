@@ -1,4 +1,4 @@
-function merge(arr1: Array<number>, arr2: Array<number>) {
+function merge(arr1: Array<number>, arr2: Array<number>): Array<number> {
     let result = [];
     let i = 0, j = 0;
     while (i < arr1.length && j < arr2.length) {
@@ -25,8 +25,8 @@ function merge(arr1: Array<number>, arr2: Array<number>) {
 function mergeSort(arr: Array<number>) {
     if (arr.length <= 1) return arr;
     let mid = Math.floor(arr.length / 2);
-    let left = mergeSort(arr.slice(0, mid));
-    let right = mergeSort(arr.slice(mid));
+    let left: number[] = mergeSort(arr.slice(0, mid));
+    let right: number[] = mergeSort(arr.slice(mid));
     return merge(left, right);
 }
 
