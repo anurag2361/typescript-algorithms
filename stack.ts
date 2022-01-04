@@ -9,8 +9,8 @@ class StackNode {
 }
 
 class Stack {
-    first: any;
-    last: any;
+    first: StackNode | null;
+    last: StackNode | null;
     size: number;
     constructor() {
         this.first = null;
@@ -37,14 +37,15 @@ class Stack {
         if (this.first === this.last) {
             this.last = null;
         }
-        this.first = this.first.next;
+        this.first = this.first!.next;
         this.size--;
-        return temp.value;
+        return temp!.value;
     }
 }
 
 const obj = new Stack();
 obj.push(24);
 obj.push(25);
+obj.pop();
 obj.pop();
 console.log(obj);
