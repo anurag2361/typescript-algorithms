@@ -1,6 +1,6 @@
 class StackNode {
     value: any;
-    next: any;
+    next: StackNode | null;
     constructor(value: string | number) {
         this.value = value;
         this.next = null;
@@ -46,6 +46,5 @@ class Stack {
 const obj = new Stack();
 obj.push(24);
 obj.push(25);
-obj.pop();
 obj.pop();
 console.log(obj);
