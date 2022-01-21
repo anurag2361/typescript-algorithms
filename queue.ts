@@ -1,6 +1,6 @@
 class NewNode<T> {
     val: T;
-    next: T;
+    next: NewNode<T> | T | null;
     constructor(val: T) {
         this.val = val;
         this.next = null;
@@ -8,8 +8,8 @@ class NewNode<T> {
 }
 
 class Queue<T> {
-    first: any;
-    last: any;
+    first: NewNode<T> | null;
+    last: NewNode<T> | null;
     size: number;
     constructor() {
         this.first = null;
@@ -17,13 +17,13 @@ class Queue<T> {
         this.size = 0;
     }
 
-    enqueue(value: string | number): number {
+    enqueue(value: T): number {
         const newNode = new NewNode(value);
         if (!this.first && !this.last) {
             this.first = newNode;
             this.last = newNode;
         } else {
-            this.last.next = newNode;
+            this.last!.next = newNode as NewNode<T>;
             this.last = newNode;
         }
         return ++this.size;
@@ -35,9 +35,9 @@ class Queue<T> {
         if (this.first === this.last) {
             this.last = null;
         }
-        this.first = this.first.next;
+        this.first = this.first!.next as NewNode<T>;
         this.size--;
-        return temp.value;
+        return temp!.val;
     }
 }
 
